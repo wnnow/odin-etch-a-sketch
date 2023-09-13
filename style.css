@@ -1,0 +1,32 @@
+html {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-direction: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  text-align: center;
+}
+.container {
+  height: 625px;
+  width: 625px;
+  border: 1px solid black;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.box {
+  display: inline-block;
+  height: 23px;
+  width: 23px;
+  border: 1px solid black;
+}
