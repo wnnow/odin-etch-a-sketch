@@ -1,10 +1,11 @@
 const container = document.querySelector(".container");
-const containerHeight = container.clientHeight;
-const containerWidth = container.clientWidth;
-let squareNumber;
 const blackBtn = document.querySelector("#black-color-btn");
 const randomBtn = document.querySelector("#random-color-btn");
 const eraseBtn = document.querySelector("#erase-color-btn");
+const rainbowBtn = document.querySelector("#rainbow-color-btn");
+const containerHeight = container.clientHeight;
+const containerWidth = container.clientWidth;
+let squareNumber;
 
 function createBox() {
   const container = document.querySelector(".container");
@@ -21,11 +22,11 @@ function createBoxLoop(squareNumber) {
   }
 }
 
-function applyBoxBlackColor() {
+function applyBoxColor(color) {
   const boxs = document.querySelectorAll(".box");
   boxs.forEach((box) =>
     box.addEventListener("mouseover", (e) => {
-      e.target.style.backgroundColor = "black";
+      e.target.style.backgroundColor = `${color}`;
     })
   );
 }
@@ -39,15 +40,6 @@ function applyBoxRandomColor() {
       )}, ${Math.floor(Math.random() * 255)}, ${Math.floor(
         Math.random() * 255
       )})`;
-    })
-  );
-}
-
-function applyBoxEraseColor() {
-  const boxs = document.querySelectorAll(".box");
-  boxs.forEach((box) =>
-    box.addEventListener("mouseover", (e) => {
-      e.target.style.backgroundColor = "white";
     })
   );
 }
@@ -68,10 +60,24 @@ btn.addEventListener("click", () => {
   }
   clearBox();
   createBoxLoop(squareNumber);
-  applyBoxBlackColor();
+  applyBoxColor("black");
   return squareNumber;
 });
 
-blackBtn.addEventListener("click", applyBoxBlackColor);
-randomBtn.addEventListener("click", applyBoxRandomColor);
-eraseBtn.addEventListener("click", applyBoxEraseColor);
+blackBtn.addEventListener("click", () => {
+  applyBoxColor("black");
+});
+
+randomBtn.addEventListener("click", () => {
+  applyBoxColor(
+    `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+      Math.random() * 255
+    )}, ${Math.floor(Math.random() * 255)})`
+  );
+});
+
+rainbowBtn.addEventListener("click", applyBoxRandomColor);
+
+eraseBtn.addEventListener("click", () => {
+  applyBoxColor("white");
+});
