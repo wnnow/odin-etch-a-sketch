@@ -3,12 +3,6 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
-*,
-*::before,
-*::after {
-  box-direction: inherit;
-}
-
 body {
   margin: 0;
   padding: 0;

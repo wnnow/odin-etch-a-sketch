@@ -52,8 +52,11 @@ function applyBoxIncreaseAlpha() {
   boxs.forEach((box) => {
     let alpha = parseInt(box.dataset.alpha);
     box.addEventListener("mouseover", (e) => {
-      if (alpha > 1) return;
-      e.target.style.backgroundColor = `rgba(0, 0, 0, ${(alpha += 0.1)})`;
+      if (alpha > 1) {
+        alpha = 1;
+      }
+      alpha += 0.1;
+      e.target.style.backgroundColor = `rgba(0, 0, 0, ${alpha})`;
     });
   });
 }
