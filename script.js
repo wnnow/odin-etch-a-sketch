@@ -19,17 +19,31 @@ function createBoxLoop(squareNumber) {
   }
 }
 
-const boxs = document.querySelectorAll(".box");
-boxs.forEach((box) =>
-  box.addEventListener("mouseover", (e) => {
-    e.target.style.backgroundColor = "black";
-  })
-);
+function applyBoxColor() {
+  const boxs = document.querySelectorAll(".box");
+  boxs.forEach((box) =>
+    box.addEventListener("mouseover", (e) => {
+      e.target.style.backgroundColor = "black";
+    })
+  );
+}
+
+function clearBox() {
+  container.replaceChildren();
+}
 
 const btn = document.querySelector("#create-square-btn");
 btn.addEventListener("click", () => {
-  squareNumber = +prompt("How many squre do you want? (Max 100)", 100);
-  console.log(squareNumber);
+  squareNumber = +prompt("How many squre do you want? 1-100", 100);
+  if (typeof squareNumber !== "number" || isNaN(squareNumber)) {
+    alert("Please input NUMBER!");
+    return;
+  } else if (squareNumber > 100 || squareNumber < 1) {
+    alert("Please input number 1-100");
+    return;
+  }
+  clearBox();
   createBoxLoop(squareNumber);
+  applyBoxColor();
   return squareNumber;
 });
