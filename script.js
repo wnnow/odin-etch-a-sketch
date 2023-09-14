@@ -3,6 +3,9 @@ const blackBtn = document.querySelector("#black-color-btn");
 const randomBtn = document.querySelector("#random-color-btn");
 const eraseBtn = document.querySelector("#erase-color-btn");
 const rainbowBtn = document.querySelector("#rainbow-color-btn");
+const alphaBtn = document.querySelector("#alpha-btn");
+const resetBtn = document.querySelector("#reset-btn");
+
 const containerHeight = container.clientHeight;
 const containerWidth = container.clientWidth;
 let squareNumber;
@@ -13,6 +16,7 @@ function createBox() {
   div.classList.add("box");
   div.style.width = `${containerHeight / squareNumber - 2}px`;
   div.style.height = `${containerWidth / squareNumber - 2}px`;
+  div.setAttribute("data-alpha", "0.1");
   container.appendChild(div);
 }
 
@@ -42,6 +46,16 @@ function applyBoxRandomColor() {
       )})`;
     })
   );
+}
+function applyBoxIncreaseAlpha() {
+  const boxs = document.querySelectorAll(".box");
+  boxs.forEach((box) => {
+    let alpha = parseInt(box.dataset.alpha);
+    box.addEventListener("mouseover", (e) => {
+      if (alpha > 1) return;
+      e.target.style.backgroundColor = `rgba(0, 0, 0, ${(alpha += 0.1)})`;
+    });
+  });
 }
 
 function clearBox() {
@@ -78,6 +92,16 @@ randomBtn.addEventListener("click", () => {
 
 rainbowBtn.addEventListener("click", applyBoxRandomColor);
 
-eraseBtn.addEventListener("click", () => {
+alphaBtn.addEventListener("click", applyBoxIncreaseAlpha);
+
+eraseBtn.addEventListener("click", (e) => {
+  console.log(e);
   applyBoxColor("white");
+});
+
+resetBtn.addEventListener("click", () => {
+  clearBox();
+  createBoxLoop(squareNumber);
+  // after create new box mouse hover don't give any background color change effect
+  applyBoxColor("black");
 });
